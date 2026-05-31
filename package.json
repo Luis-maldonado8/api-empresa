@@ -1,7 +1,7 @@
 {
   "name": "notion-backend",
   "version": "1.0.0",
-  "description": "Backend REST API para manejar registros de la empresa Notion con Node.js, Express y MongoDB.",
+  "description": "Backend REST API para manejar espacios de trabajo de Notion con Node.js, Express y MongoDB.",
   "main": "server.js",
   "type": "module",
   "scripts": {

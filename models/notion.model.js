@@ -1,60 +1,74 @@
-﻿import mongoose from 'mongoose';
+import mongoose from 'mongoose';
 
 const notionSchema = new mongoose.Schema(
   {
-    nombreEmpresa: {
+    nombreWorkspace: {
       type: String,
-      required: [true, 'El nombre de la empresa es obligatorio'],
+      required: [true, 'El nombre del workspace es obligatorio'],
       trim: true,
-      default: 'Notion'
+      minlength: [3, 'El nombre del workspace debe tener al menos 3 caracteres']
     },
-    industria: {
+    tipoPlan: {
       type: String,
-      required: [true, 'La industria es obligatoria'],
-      trim: true
+      required: [true, 'El tipo de plan es obligatorio'],
+      trim: true,
+      enum: {
+        values: ['Free', 'Plus', 'Business', 'Enterprise'],
+        message: 'El tipo de plan debe ser Free, Plus, Business o Enterprise'
+      }
     },
-    sede: {
+    categoriaUso: {
       type: String,
-      required: [true, 'La sede es obligatoria'],
-      trim: true
-    },
-    pais: {
-      type: String,
-      required: [true, 'El pais es obligatorio'],
-      trim: true
+      required: [true, 'La categoria de uso es obligatoria'],
+      trim: true,
+      enum: {
+        values: ['Educacion', 'Empresa', 'Productividad', 'Proyectos', 'Personal'],
+        message: 'La categoria debe ser Educacion, Empresa, Productividad, Proyectos o Personal'
+      }
     },
     descripcion: {
       type: String,
       required: [true, 'La descripcion es obligatoria'],
-      trim: true
+      trim: true,
+      minlength: [10, 'La descripcion debe tener al menos 10 caracteres']
     },
-    sitioWeb: {
+    cantidadPaginas: {
+      type: Number,
+      required: [true, 'La cantidad de paginas es obligatoria'],
+      min: [1, 'Debe existir al menos una pagina']
+    },
+    miembrosEquipo: {
+      type: Number,
+      required: [true, 'La cantidad de miembros es obligatoria'],
+      min: [1, 'Debe existir al menos un miembro']
+    },
+    integraciones: {
+      type: [String],
+      default: []
+    },
+    plantillaPrincipal: {
       type: String,
-      required: [true, 'El sitio web es obligatorio'],
+      required: [true, 'La plantilla principal es obligatoria'],
       trim: true
-    },
-    numeroEmpleados: {
-      type: Number,
-      required: [true, 'El numero de empleados es obligatorio'],
-      min: [0, 'El numero de empleados no puede ser negativo']
-    },
-    ingresosAnuales: {
-      type: Number,
-      required: [true, 'Los ingresos anuales son obligatorios'],
-      min: [0, 'Los ingresos anuales no pueden ser negativos']
     },
     estado: {
       type: String,
-      enum: ['Activa', 'Inactiva', 'En expansion', 'En expansión'],
-      default: 'Activa'
+      required: [true, 'El estado es obligatorio'],
+      trim: true,
+      enum: {
+        values: ['Activo', 'En revision', 'Archivado'],
+        message: 'El estado debe ser Activo, En revision o Archivado'
+      },
+      default: 'Activo'
     },
-    fechaFundacion: {
+    fechaCreacionWorkspace: {
       type: Date,
-      required: [true, 'La fecha de fundacion es obligatoria']
+      default: Date.now
     }
   },
   {
-    timestamps: true
+    timestamps: true,
+    versionKey: false
   }
 );
 

@@ -1,20 +1,18 @@
-﻿import { Router } from 'express';
+import express from 'express';
 import {
-  getAllNotionCompanies,
-  getNotionCompanyById,
-  postNotionCompany,
-  putNotionCompany,
-  deleteNotionCompany,
-  getNotionCompaniesByCountry
+  crearNotion,
+  obtenerNotions,
+  obtenerNotionPorId,
+  actualizarNotion,
+  eliminarNotion
 } from '../controllers/notion.controllers.js';
 
-const router = Router();
+const router = express.Router();
 
-router.get('/', getAllNotionCompanies);
-router.post('/', postNotionCompany);
-router.get('/pais/:pais', getNotionCompaniesByCountry);
-router.get('/:id', getNotionCompanyById);
-router.put('/:id', putNotionCompany);
-router.delete('/:id', deleteNotionCompany);
+router.post('/', crearNotion);
+router.get('/', obtenerNotions);
+router.get('/:id', obtenerNotionPorId);
+router.put('/:id', actualizarNotion);
+router.delete('/:id', eliminarNotion);
 
 export default router;

@@ -1,16 +1,13 @@
-﻿import mongoose from 'mongoose';
+import mongoose from 'mongoose';
 
-const conectarMongoDB = async () => {
+const connectDB = async () => {
   try {
-    const mongoUri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/NotionBackend';
-
-    await mongoose.connect(mongoUri);
-
-    console.log('Conexion a MongoDB exitosa');
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log('Conexion a MongoDB realizada correctamente');
   } catch (error) {
     console.error('Error al conectar con MongoDB:', error.message);
     process.exit(1);
   }
 };
 
-export { conectarMongoDB };
+export default connectDB;
